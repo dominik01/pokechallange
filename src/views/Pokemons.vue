@@ -68,7 +68,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import { pokeApiUrl } from '@/main'
 
 export default {
@@ -96,7 +95,7 @@ export default {
     }
   },
   mounted () {
-    fetch(`${pokeApiUrl}/pokemon?limit=10000/`, { mode: 'no-cors'})
+    fetch(`${pokeApiUrl}/pokemon?limit=10000/`)
       .then(response => response.json())
       .then(data => {
         this.pokemonList = data.results

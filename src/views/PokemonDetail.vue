@@ -94,7 +94,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import { storageMixin } from '@/mixins/storageMixin'
 import { capitalize } from '@/filters/capitalize'
 import { pokeApiUrl } from '@/main'
@@ -120,17 +119,26 @@ export default {
     capitalize
   },
   created () {
-    axios
-      .get(`${pokeApiUrl}/pokemon/${this.pokemonName}`)
-      .then(response => {
-        this.pokemonAttributes = response.data
-        this.loaded = true
-      })
-      .catch((error) => {
-        this.errorMsg = `Error ${error.response.status}: pokemon ${error.response.data}`
-      })
+    this.loadPokemon()
   },
   methods: {
+    loadPokemon () {
+      fetch(`${pokeApiUrl}/pokemon/${this.pokemonName}`)
+        .then(response => {
+          if (response.status === 404) {
+            this.errorMsg = 'Error, pokemon not found'
+            return
+          }
+          return response.json()
+        })
+        .then(data => {
+          this.pokemonAttributes = data
+          this.loaded = true
+        })
+        .catch((error) => {
+          console.error('Error:', error)
+        })
+    },
     saveToCollection () {
       this.pokemonCollection.push({
         id: this.pokemonAttributes.id,
@@ -156,6 +164,11 @@ export default {
         window.localStorage.setItem('pokemons', JSON.stringify(this.pokemonStorage))
       }
       this.pokemonAdded = true
+    }
+  },
+  watch: {
+    $route (detail) {
+      this.loadPokemon()
     }
   }
 }
