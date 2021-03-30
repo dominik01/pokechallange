@@ -96,7 +96,7 @@ export default {
   },
   mounted () {
     axios
-      .get(`${pokeApiUrl}/pokemon?limit=10000`)
+      .get(`${pokeApiUrl}/pokemon?limit=10000/`)
       .then(response => {
         this.pokemonList = response.data.results
         this.totalRows = response.data.results.length
