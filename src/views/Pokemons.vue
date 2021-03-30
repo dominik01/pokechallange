@@ -36,6 +36,9 @@
         </b-form-group>
       </div>
     </div>
+    <div class="row" v-show="!loaded">
+      <b-spinner variant="primary" label="Spinning"></b-spinner>
+    </div>
     <div class="row" v-show="loaded">
       <div class="col-md-12">
         <b-table
