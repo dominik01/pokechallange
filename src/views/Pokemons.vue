@@ -36,7 +36,7 @@
         </b-form-group>
       </div>
     </div>
-    <div class="row">
+    <div class="row" v-show="loaded">
       <div class="col-md-12">
         <b-table
           show-empty
@@ -85,7 +85,8 @@ export default {
       currentPage: 1,
       pokemonList: [],
       totalRows: 1,
-      filter: null
+      filter: null,
+      loaded: false
     }
   },
   methods: {
@@ -95,11 +96,12 @@ export default {
     }
   },
   mounted () {
-    axios
-      .get(`${pokeApiUrl}/pokemon?limit=10000/`)
-      .then(response => {
-        this.pokemonList = response.data.results
-        this.totalRows = response.data.results.length
+    fetch(`${pokeApiUrl}/pokemon?limit=10000/`)
+      .then(response => response.json())
+      .then(data => {
+        this.pokemonList = data.results
+        this.totalRows = data.results.length
+        this.loaded = true
       })
   }
 }
