@@ -5,6 +5,9 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+// added cors anywhere as a temporary solution for CORS problem with pokeapi
+export const pokeApiUrl = 'https://cors-anywhere.herokuapp.com/https://pokeapi.co/api/v2/'
+
 Vue.config.productionTip = false
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)

@@ -69,8 +69,8 @@
 
 <script>
 import axios from 'axios'
+import { pokeApiUrl } from '@/main'
 
-const pokeApiUrl = 'https://pokeapi.co/api/v2/'
 export default {
   name: 'Pokemons',
   data () {

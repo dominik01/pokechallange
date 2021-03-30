@@ -97,8 +97,7 @@
 import axios from 'axios'
 import { storageMixin } from '@/mixins/storageMixin'
 import { capitalize } from '@/filters/capitalize'
-
-const pokemonDetailApi = 'https://pokeapi.co/api/v2/pokemon/'
+import { pokeApiUrl } from '@/main'
 
 export default {
   name: 'PokemonDetail',
@@ -122,7 +121,7 @@ export default {
   },
   created () {
     axios
-      .get(`${pokemonDetailApi}/${this.pokemonName}`)
+      .get(`${pokeApiUrl}/pokemon/${this.pokemonName}`)
       .then(response => {
         this.pokemonAttributes = response.data
         this.loaded = true
