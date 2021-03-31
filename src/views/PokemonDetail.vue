@@ -1,5 +1,8 @@
 <template>
   <div class="pokemon-detail container">
+    <div class="row" v-show="!loaded">
+      <b-spinner variant="primary" label="Spinning"></b-spinner>
+    </div>
     <div v-if="!errorMsg && loaded">
       <div class="row mb-3">
         <div class="col"><h1>{{ pokemonName | capitalize }}</h1></div>
