@@ -1,7 +1,7 @@
 # pokeindex
 
 ## Live demo
-https://dominik-poke-index.herokuapp.com/
+https://dominik01.github.io/
 
 
 ## Project setup
