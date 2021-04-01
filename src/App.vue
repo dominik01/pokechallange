@@ -3,7 +3,7 @@
     <div id="nav">
       <router-link to="/">Pokemons</router-link> |
       <router-link to="/my-collection">My pokemons</router-link> |
-      <router-link to="/wishlist">Whishlist</router-link>
+      <router-link to="/wishlist">Wishlist</router-link>
     </div>
     <router-view/>
   </div>

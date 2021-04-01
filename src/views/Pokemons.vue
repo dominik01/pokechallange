@@ -98,7 +98,7 @@ export default {
     }
   },
   mounted () {
-    fetch(`${pokeApiUrl}/pokemon?limit=10000/`, {mode: 'cors' })
+    fetch(`${pokeApiUrl}/pokemon?limit=10000/`, { mode: 'cors' })
       .then(response => response.json())
       .then(data => {
         this.pokemonList = data.results
