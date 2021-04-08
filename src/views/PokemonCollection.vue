@@ -7,6 +7,9 @@
     </div>
     <div class="row">
       <div class="col">
+        <div class="pokemons-raw-data">
+          {{pokemonCollection}}
+        </div>
         <b-table striped hover :fields="fields" :items="this.pokemonStorage.collection">
           <template #cell(name)="data">
             <router-link :to="{ name: 'pokemonDetail', params: { pokemonName: data.value }}">{{
@@ -76,6 +79,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.pokemons-raw-data{
+  display: none;
+}
 div.actions{
   margin-bottom: 2em;
   div{

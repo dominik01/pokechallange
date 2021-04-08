@@ -40,7 +40,7 @@
       <b-spinner variant="primary" label="Spinning"></b-spinner>
     </div>
     <div class="row" v-show="loaded">
-      <div class="col-md-12">
+      <div class="col-md-12" id="pokemon-table">
         <b-table
           show-empty
           striped
