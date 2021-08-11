@@ -39,6 +39,9 @@
     <div class="row" v-show="!loaded">
       <b-spinner variant="primary" label="Spinning"></b-spinner>
     </div>
+    <div class="row" v-show="!loaded && error !== ''">
+      {{error}}
+    </div>
     <div class="row" v-show="loaded">
       <div class="col-md-12" id="pokemon-table">
         <b-table
@@ -71,10 +74,12 @@
 </template>
 
 <script>
+import { BFormGroup, BInputGroup, BFormInput, BButton, BTable, BSpinner, BPagination, BInputGroupAppend } from 'bootstrap-vue'
 import { pokeApiUrl } from '@/main'
 
 export default {
   name: 'Pokemons',
+  components: { BFormGroup, BInputGroup, BFormInput, BButton, BTable, BSpinner, BPagination, BInputGroupAppend },
   data () {
     return {
       perPage: 20,
@@ -88,22 +93,33 @@ export default {
       pokemonList: [],
       totalRows: 1,
       filter: null,
-      loaded: false
+      loaded: false,
+      error: ''
     }
   },
   methods: {
     onFiltered (filteredItems) {
       this.totalRows = filteredItems.length
       this.currentPage = 1
+    },
+    getAllPokemons (limit) {
+      fetch(`${pokeApiUrl}/pokemon?limit=${limit}/`, { mode: 'cors' })
+        .then(response => response.json())
+        .then(data => {
+          this.pokemonList = data.results
+          this.totalRows = data.results.length
+          this.loaded = true
+        })
     }
   },
   mounted () {
-    fetch(`${pokeApiUrl}/pokemon?limit=10000/`, { mode: 'cors' })
+    fetch(`${pokeApiUrl}/pokemon?limit=1`, { mode: 'cors' })
       .then(response => response.json())
       .then(data => {
-        this.pokemonList = data.results
-        this.totalRows = data.results.length
-        this.loaded = true
+        (data.count !== undefined) ? this.getAllPokemons(data.count) : this.getAllPokemons(10000)
+      })
+      .catch(() => {
+        this.error = 'Unexpected error with PokeAPI please try later'
       })
   }
 }
