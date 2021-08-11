@@ -20,10 +20,12 @@
 </template>
 
 <script>
+import { BTable, BButton } from 'bootstrap-vue'
 import { storageMixin } from '@/mixins/storageMixin'
 
 export default {
   name: 'PokemonWishList',
+  components: { BTable, BButton },
   mixins: [storageMixin],
   data () {
     return {

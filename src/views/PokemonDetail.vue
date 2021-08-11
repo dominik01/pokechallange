@@ -97,12 +97,14 @@
 </template>
 
 <script>
+import {BButton, BSpinner, BTabs, BTab, BAlert, BTooltip} from "bootstrap-vue"
 import { storageMixin } from '@/mixins/storageMixin'
 import { capitalize } from '@/filters/capitalize'
 import { pokeApiUrl } from '@/main'
 
 export default {
   name: 'PokemonDetail',
+  components: { BButton, BSpinner, BTab, BTabs, BAlert, BTooltip },
   props: {
     pokemonName: String
   },
